@@ -19,6 +19,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
+    render :layout => params['ic-request'].blank?
   end
 
   # POST /contacts
@@ -40,14 +41,10 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
-    respond_to do |format|
-      if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
-      else
-        format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
-      end
+    if @contact.update(contact_params)
+      render action: :show, :layout => params['ic-request'].blank?
+    else
+      render action: :edit, :layout => params['ic-request'].blank?
     end
   end
 
