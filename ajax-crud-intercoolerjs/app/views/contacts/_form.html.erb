@@ -24,7 +24,11 @@
     <%= f.text_field :email %>
   </div>
   <div class="actions">
-    <button ic-put-to="<%= contact_path(@contact) %>"
+    <button <% if @contact.persisted? %>
+              ic-put-to="<%= contact_path @contact %>"
+            <% else %>
+              ic-post-to="<%= contacts_path %>"
+            <% end %>
             ic-target="#content-div">
       Save Contact
     </button>
