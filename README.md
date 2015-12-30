@@ -1,6 +1,7 @@
 # Ruby on Rails Example Apps
 
 ## AJAX CRUD using intercooler.js (ajax-crud-intercoolerjs)
+![Contact](ajax-crud-intercoolerjs/erd.png)
 
 ## Versions
 - ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-linux]
