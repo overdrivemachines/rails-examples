@@ -5,20 +5,25 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   def index
     @contacts = Contact.all
+    render :layout => params['ic-request'].blank?
   end
 
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    render :layout => params['ic-request'].blank?
   end
 
   # GET /contacts/new
   def new
     @contact = Contact.new
+    render :layout => params['ic-request'].blank?
   end
 
   # GET /contacts/1/edit
   def edit
+    # Set browser URL to /contacts/1/edit
+    headers['X-IC-SetLocation'] = edit_contact_path(@contact)
     render :layout => params['ic-request'].blank?
   end
 
@@ -27,23 +32,28 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
 
-    respond_to do |format|
-      if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
-        format.json { render :show, status: :created, location: @contact }
-      else
-        format.html { render :new }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
-      end
+    if @contact.save
+      flash[:notice] = 'Created Contact'
+      # Set browser URL to /contacts/1
+      headers['X-IC-SetLocation'] = contact_path @contact
+      render action: :show, :layout => params['ic-request'].blank?      
+    else
+      flash[:error] = 'Could not create Contact'
+      render action: :new, :layout => params['ic-request'].blank?
     end
+
   end
 
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
     if @contact.update(contact_params)
+      flash[:notice] = "Updated Contact"
+      # Set browser URL to /contacts/1
+      headers['X-IC-SetLocation'] = contact_path(@contact)
       render action: :show, :layout => params['ic-request'].blank?
     else
+      flash[:error] = "Could not update Contact"
       render action: :edit, :layout => params['ic-request'].blank?
     end
   end
