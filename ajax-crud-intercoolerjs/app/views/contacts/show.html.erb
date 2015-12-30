@@ -15,5 +15,8 @@
   <%= @contact.email %>
 </p>
 
-<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<a ic-get-from="<%= edit_contact_path(@contact) %>"
+   ic-target="#content-div">
+   Edit
+</a> |
 <%= link_to 'Back', contacts_path %>
