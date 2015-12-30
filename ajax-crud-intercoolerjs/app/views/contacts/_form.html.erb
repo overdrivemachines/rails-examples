@@ -24,6 +24,9 @@
     <%= f.text_field :email %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <button ic-put-to="<%= contact_path(@contact) %>"
+            ic-target="#content-div">
+      Save Contact
+    </button>
   </div>
 <% end %>
