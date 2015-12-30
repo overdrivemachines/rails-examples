@@ -1,8 +1,10 @@
 # Ruby on Rails Example Apps
 
 ## AJAX CRUD using intercooler.js (ajax-crud-intercoolerjs)
-Converting a Rails CRUD UI into an AJAX UI using intercooler.js
+
 ![Contact](ajax-crud-intercoolerjs/erd.png)
+
+Converting a Rails CRUD UI into an AJAX UI using intercooler.js
 
 ---
 
